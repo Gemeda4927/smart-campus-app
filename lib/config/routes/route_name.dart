@@ -14,7 +14,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: RouteName.home,
+  initialLocation: RouteName.signup,
   debugLogDiagnostics: true,
   routes: [
     // Auth routes
