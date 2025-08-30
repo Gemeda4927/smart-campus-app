@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/config/routes/route_name.dart';
 import 'package:mobile/features/auth/login/presentation/bloc/login_bloc.dart';
 import 'package:mobile/features/auth/signup/presentation/bloc/signup_bloc.dart';
+import 'package:mobile/features/university/presentation/bloc/university_bloc.dart';
 import 'package:mobile/injector.dart';
 import 'package:overlay_support/overlay_support.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (_) => sl<SignupBloc>()),
           BlocProvider(create: (_) => sl<LoginAuthBloc>()),
+          BlocProvider(create: (_) => sl<UniversityBloc>()), 
         ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
