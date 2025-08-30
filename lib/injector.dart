@@ -1,5 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:mobile/core/handlers/dio_client.dart';
+import 'package:mobile/features/auth/login/data/repository/login_repository_impl.dart';
+import 'package:mobile/features/auth/login/data/services/login_services.dart';
+import 'package:mobile/features/auth/login/domain/repository/login_repository.dart';
+import 'package:mobile/features/auth/login/domain/usecases/login_usecases.dart';
+import 'package:mobile/features/auth/login/presentation/bloc/login_bloc.dart';
 import 'package:mobile/features/auth/signup/data/repository/signup_repository_impl.dart';
 import 'package:mobile/features/auth/signup/data/services/services.dart';
 import 'package:mobile/features/auth/signup/domain/repository/signup_repository.dart';
@@ -22,5 +27,28 @@ Future<void> initInjector() async {
   sl.registerLazySingleton<SignupUser>(() => SignupUser(sl<AuthRepository>()));
   sl.registerFactory<SignupBloc>(
     () => SignupBloc(signupUser: sl<SignupUser>()),
+  );
+
+  // ------------------ Feature: Login / Auth ------------------
+  sl.registerSingleton<LoginAuthService>(LoginAuthService(sl<DioClient>()));
+  sl.registerLazySingleton<LoginAuthRepository>(
+    () => LoginRepositoryImpl(sl<LoginAuthService>()),
+  );
+
+  sl.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(sl<LoginAuthRepository>()),
+  );
+  sl.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(sl<LoginAuthRepository>()),
+  );
+  sl.registerLazySingleton<GetTokenUseCase>(
+    () => GetTokenUseCase(sl<LoginAuthRepository>()),
+  );
+  sl.registerFactory<LoginAuthBloc>(
+    () => LoginAuthBloc(
+      loginUseCase: sl<LoginUseCase>(),
+      logoutUseCase: sl<LogoutUseCase>(),
+      getTokenUseCase: sl<GetTokenUseCase>(),
+    ),
   );
 }
