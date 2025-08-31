@@ -11,7 +11,8 @@ import 'package:mobile/features/university/presentation/screen/universityDetailS
 import 'package:mobile/features/university/presentation/screen/universityHomeScreen.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>();
 
 final GoRouter appRouter = GoRouter(
   navigatorKey: _rootNavigatorKey,
@@ -22,12 +23,12 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: RouteName.login,
       name: RouteName.login,
-      builder: (context, state) => LoginScreen(),
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: RouteName.signup,
       name: RouteName.signup,
-      builder: (context, state) => SignupScreen(),
+      builder: (context, state) => const SignupScreen(),
     ),
     // Shell route for bottom navigation
     ShellRoute(
